@@ -1,11 +1,31 @@
+
+
 """
-    Learning using the hot and cold method.
-At the end of the day, learning is really about one thing: adjusting knob_weight either up
-or down so the error is reduced. If you keep doing this and the error goes to 0, you’re done
-learning! How do you know whether to turn the knob up or down? Well, you try both up and
-down and see which one reduces the error! Whichever one reduces the error is used to update
-knob_weight. It’s simple but effective. After you do this over and over again, eventually
-error == 0, which means the neural network is predicting with perfect accuracy.
+    whats_the_simplest_form_of_neural_learning()
+
+
+# Grokking Deep Learning (Andrew W. Trask) (z-lib.org)
+# PDF pg. 52
+A simple neural learning algorithm to predict the value of the target by tuning the weight of the input. 
+
+# Arguments
+- `input::Float64`: input value
+- `weight::Float64`: initial weight value
+- `target::Float64`: target value to predict
+- `step_amount::Float64`: amount by which weight is adjusted at each iteration
+
+# Returns
+- `Nothing`: the function doesn't return anything, it simply prints the error and prediction at each iteration to the console
+
+# Examples
+```julia
+julia> whats_the_simplest_form_of_neural_learning()
+Error: 0.04000000000000007 Prediction: 0.05
+Error: 0.038400000000000034 Prediction: 0.060000000000000005
+Error: 0.03686400000000003 Prediction: 0.06999999999999999
+Error: 0.03539136000000002 Prediction: 0.08
+Error: 0.03398083840000002 Prediction: 0.09
+...
 """
 function whats_the_simplest_form_of_neural_learning()
     input = 0.5

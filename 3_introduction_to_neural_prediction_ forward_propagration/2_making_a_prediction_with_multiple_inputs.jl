@@ -53,5 +53,5 @@ end
 
 
 begin
-    making_a_prediction_with_multiple_inputs_2()
+    making_a_prediction_with_multiple_inputs()
 end

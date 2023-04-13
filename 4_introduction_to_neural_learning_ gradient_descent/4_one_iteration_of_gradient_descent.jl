@@ -52,7 +52,11 @@ function third_iteration_of_gradient_descent()
         error = (pred - target) ^ 2
         weight -= (input * (pred - target)) * alpha
         
-        plt = plot([0, 10], [weight * 0, weight * 10], label="Prediction")
+        plt = plot(
+            [0, 10],
+            [weight * 0,
+            weight * 10],
+            label="Prediction")
         plot!([0, 10], [0, 10], label="Target")
         plot!([input, input], [0, pred], linestyle=:dash, label="")
         title!("Iteration: $iter, Error: $(round(error, digits=5))")
@@ -64,32 +68,39 @@ end
 Base.@kwdef mutable struct GradDescent
     input::Float64 = 8.5
     weight::Float64 = 0.1
-    target::Float64 = 1.0
+    target::Int128 = 10
     alpha::Float64 = 0.01
     pred::Float64 = 0.0
     error::Float64 = 0.0
+    iter::Int128 = 0
+    x::Float64 = 0.0
+    y::Float64 = 0.0
 end
 
 function step!(l::GradDescent)
+    l.x += 1
     l.pred = l.input * l.weight
-    l.error = (l.pred - l.target) ^ 2
+    l.error = round((l.pred - l.target) ^ 2, digits=3)
     l.weight -= (l.input * (l.pred - l.target)) * l.alpha
+    l.y=l.error
+    println("X: $(round(l.x, digits=2)) Y: $(l.y)")
 end
 
 begin
     grad_descent = GradDescent()
 
-    plt = plot3d(
+    plt = plot(
         1,
-        xlim = (-1.0, 1.0),
-        ylim = (-1.0, 1.0),
+        xlim = (0,10),
+        ylim = (0,100),
         title = "Gradual Descent",
         legend = false,
-        marker = 2,
+        marker = 3,
     )
 
-    @gif for i=1:10
+    @gif for iter in 1:10
         step!(grad_descent)
-        push!(plt, grad_descent.target, grad_descent.error)
+        push!(plt,grad_descent.x, grad_descent.error)
+
     end every 10
 end

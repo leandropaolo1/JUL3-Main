@@ -1,3 +1,7 @@
+# Grokking Deep Learning (Andrew W. Trask) (z-lib.org)
+# PDF pg. 59
+
+
 function one_iteration_of_gradient_descent()
     input = 8.5
     weight = 0.1
@@ -12,7 +16,9 @@ function one_iteration_of_gradient_descent()
         weight -= weighted_delta * alpha
 
         println("Iter: $iter Error: $(round(error, digits=5)) Prediction: $(round(pred, digits=5))")
+
     end
+
 end
 
 begin

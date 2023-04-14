@@ -72,35 +72,34 @@ Base.@kwdef mutable struct GradDescent
     alpha::Float64 = 0.01
     pred::Float64 = 0.0
     error::Float64 = 0.0
-    iter::Int128 = 0
-    x::Float64 = 0.0
-    y::Float64 = 0.0
+    iter::Int128 = 1
+    x::Float64 = 1
+    y::Float64 = 1
 end
 
 function step!(l::GradDescent)
-    l.x += 1
     l.pred = l.input * l.weight
     l.error = round((l.pred - l.target) ^ 2, digits=3)
     l.weight -= (l.input * (l.pred - l.target)) * l.alpha
-    l.y=l.error
+    l.y+=1
+    l.x += 1
+
     println("X: $(round(l.x, digits=2)) Y: $(l.y)")
 end
 
-begin
-    grad_descent = GradDescent()
+grad_descent = GradDescent()
 
-    plt = plot(
-        1,
-        xlim = (0,10),
-        ylim = (0,100),
-        title = "Gradual Descent",
-        legend = false,
-        marker = 3,
-    )
+plt = plot(
+    1,
+    xlim = (0,10),
+    ylim = (0,100),
+    title = "Gradual Descent",
+    legend = false,
+    marker = 3,
+)
 
-    @gif for iter in 1:10
-        step!(grad_descent)
-        push!(plt,grad_descent.x, grad_descent.error)
+@gif for iter in 1:10
+    step!(grad_descent)
+    push!(plt,grad_descent.x, grad_descent.y)
 
-    end every 10
-end
+end every 10

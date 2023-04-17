@@ -10,15 +10,18 @@ Base.@kwdef mutable struct GradDescent
     error::Float64 = 0.0
 end
 
-function step!(l::GradDescent)
-    l.pred = l.input * l.weight
-    l.error = round((l.pred - l.target) ^ 2, digits=3)
-    l.weight -= (l.input * (l.pred - l.target)) * l.alpha
-    println("Error: $(round(l.pred, digits=3)), Prediction: $(l.error)")
+function step!(grad::GradDescent)
+    grad.pred = grad.input * grad.weight
+    grad.error = round((grad.pred - grad.target) ^ 2, digits=3)
+    grad.weight -= (((grad.pred - grad.target) * grad.input) * grad.alpha)
+    println("Error: $(round(grad.error, digits=3)), Prediction: $(round(grad.pred, digits=3))")
+
 end
+
 
 grad_descent = GradDescent()
 
 for iter in 1:10
     step!(grad_descent)
 end
+

@@ -18,14 +18,17 @@ Base.@kwdef mutable struct GradDescent
 end
 
 function step!(grad::GradDescent, col::Int64)
-    for iter in 1:10
+    println("Col $col")
+
+    for iter in 1:1
         pred = grad.weights * grad.inputs[:,col]
         grad.pred = pred[1]
         grad.error = (grad.pred - grad.target[col])
-       
         grad.delta = grad.pred - grad.target[col]
-        grad.weighted_deltas = grad.delta .* grad.inputs[:,col]
-        grad.weights -= grad.weighted_deltas'
+        grad.weighted_deltas[1,:] = grad.delta .* grad.inputs[:,col]
+        println(grad.weighted_deltas)
+        grad.weights -= grad.weighted_deltas
+        println("Error: $(round(grad.error, digits=3)), Prediction: $(round(grad.pred, digits=3))")
 
         
     end

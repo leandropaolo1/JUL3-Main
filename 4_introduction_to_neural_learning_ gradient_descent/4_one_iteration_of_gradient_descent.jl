@@ -15,7 +15,6 @@ function step!(grad::GradDescent)
     grad.error = round((grad.pred - grad.target) ^ 2, digits=3)
     grad.weight -= (((grad.pred - grad.target) * grad.input) * grad.alpha)
     println("Error: $(round(grad.error, digits=3)), Prediction: $(round(grad.pred, digits=3))")
-
 end
 
 

@@ -11,7 +11,7 @@ Base.@kwdef mutable struct GradDescent
     nfans = [1.2 1.3 0.5 1.0]
     inputs = [toes;wlrec;nfans]
     weights= [0.1 0.2 -0.1;] 
-    weighted_deltas = [0 0 0;]
+    weighted_deltas = zeros(1,3)
     n_rows = size(weights,2) == 1 ? 1 : 1
     n_cols = size(inputs,2)
     predictions = zeros(n_rows, n_cols)
@@ -20,14 +20,14 @@ end
 function step!(grad::GradDescent, col::Int64)
     println("Col $col")
 
-    for iter in 1:1
+    for iter in 1:10
         pred = grad.weights * grad.inputs[:,col]
         grad.pred = pred[1]
-        grad.error = (grad.pred - grad.target[col])
+        grad.error = (grad.pred - grad.target[col]) ^ 2
         grad.delta = grad.pred - grad.target[col]
-        grad.weighted_deltas[1,:] = grad.delta * grad.inputs[:,col]
-        println(grad.weighted_deltas)
-        grad.weights -= grad.weighted_deltas
+        grad.weighted_deltas[1,:] = round.(grad.delta * grad.inputs[:,col], digits=9)
+        grad.weights -= grad.weighted_deltas .* grad.alpha
+       
         println("Error: $(round(grad.error, digits=3)), Prediction: $(round(grad.pred, digits=3))")
 
         

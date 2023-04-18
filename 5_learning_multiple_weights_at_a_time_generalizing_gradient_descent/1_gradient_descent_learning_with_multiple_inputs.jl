@@ -15,6 +15,7 @@ Base.@kwdef mutable struct GradDescent
     n_rows = size(weights,2) == 1 ? 1 : 1
     n_cols = size(inputs,2)
     predictions = zeros(n_rows, n_cols)
+    
 end
 
 function step!(grad::GradDescent, col::Int64)

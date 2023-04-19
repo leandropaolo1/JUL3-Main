@@ -1,3 +1,6 @@
+# Grokking Deep Learning (Andrew W. Trask) (z-lib.org)
+# PDF pg. 92
+
 Base.@kwdef mutable struct GradDescent
     alpha::Float64 = 0.01
     iter::Int16 = 1
@@ -29,13 +32,20 @@ Base.@kwdef mutable struct GradDescent
 end
 
 
-function step!(grad::GradDescent, col::Int8)
+function step!(grad::GradDescent, col::Int64)
     for iter in 1:10
         grad.pred[:,col] = round.(grad.weights * grad.inputs[:,col], digits=5)
         grad.errors[:,col] = round.(grad.pred[:,col] .- grad.targets[:,col] .^ 2, digits=5)
         grad.delta[:,col] = grad.pred[:,col] .- grad.targets[:,col]
         grad.weighted[:,col] = round.(grad.delta[:,col] .* grad.inputs[:,col], digits=5)
-
-
-
+        gradients = (1 / grad.n_rows) * grad.weighted[:,col]
+        grad.weights -= grad.alpha * gradients
+    end
 end
+
+grad_descent = GradDescent()
+
+for col in 1:4
+    step!(grad_descent,col)
+end
+

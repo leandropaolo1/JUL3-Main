@@ -5,6 +5,7 @@ Base.@kwdef mutable struct GradDescent
     alpha::Float64 = 0.01
     error::Float64 = 0.0
     delta::Float64 = 0.0
+    pred::Float64 = 0.0
 
     iter::Int16 = 1
     target = [1 1 0 1]
@@ -18,7 +19,6 @@ Base.@kwdef mutable struct GradDescent
     n_cols = size(inputs, 2)
     n_rows = size(weights, 2) == 1 ? 1 : size(weights, 1)
     weighted_deltas = zeros(1, 3)
-    pred = zeros(n_rows, n_cols)
 
 end
 
@@ -27,9 +27,6 @@ function step!(grad::GradDescent, col::Int64)
     for _ in 1:10
         column = grad.inputs[:,col]
         grad.pred = column' .* grad.weights
-
-
-
 
     end
 

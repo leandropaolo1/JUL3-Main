@@ -41,7 +41,6 @@ function step!(grad::GradDescent, col::Int64)
         grad.weights = grad.weights .- (grad.weighted .* grad.alpha)
     end
 
-    grad.weights = grad.original
     println("Target: $(grad.targets[:,col])")
     println("Prediction: $(round.(grad.pred[:,col], digits=3))")
 

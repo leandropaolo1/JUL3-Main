@@ -35,12 +35,11 @@ end
 function step!(grad::GradDescent, col::Int64)
     for iter in 1:100
         grad.pred[:,col] = grad.weights * grad.inputs[:,col]
-        grad.errors[:,col] = grad.pred[:,col] .- grad.targets[:,col] .^ 2
         grad.delta[:,col] = grad.pred[:,col] .- grad.targets[:,col]
         grad.weighted = grad.delta[:,col] .* grad.inputs[:,col]
         grad.weights = grad.weights .- (grad.weighted .* grad.alpha)
     end
-
+    
     println("Target: $(grad.targets[:,col])")
     println("Prediction: $(round.(grad.pred[:,col], digits=3))")
 
@@ -51,4 +50,6 @@ grad_descent = GradDescent()
 for col in 1:grad_descent.n_cols
     step!(grad_descent,col)
 end
+
+
 

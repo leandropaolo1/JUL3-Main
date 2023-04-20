@@ -10,10 +10,10 @@ Base.@kwdef mutable struct GradDescent
     iter::Int16 = 1
     target = [1 1 0 1]
     weights= [0.1 0.2 -0.1;] 
-    toes = [8.5 9.5 9.9 9.0]
-    nfans = [1.2 1.3 0.5 1.0]
-    wlrec = [0.65 0.8 0.8 0.9]
-    inputs = [toes;wlrec;nfans]
+    inputs = [
+        8.5 9.5 9.9 9.0;
+        0.65 0.8 0.8 0.9;
+        1.2 1.3 0.5 1.0]
 
     n_rows = size(weights,2) == 1 ? 1 : 1
     weighted_deltas = zeros(1,3)

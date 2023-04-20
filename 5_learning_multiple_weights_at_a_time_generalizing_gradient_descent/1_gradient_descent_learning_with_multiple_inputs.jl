@@ -34,8 +34,7 @@ function step!(grad::GradDescent, col::Int64)
         grad.weighted_deltas[1,:] = round.(grad.delta * grad.inputs[:,col], digits=5)
         grad.weights -= grad.weighted_deltas .* grad.alpha
         grad.weights = round.(grad.weights, digits=5)
-        println("Weights $(grad.weights)")
-        println("Error: $(round(grad.error, digits=3)), Prediction: $(round(grad.pred, digits=3))") 
+        println("Target: $(round(grad.target[col], digits=3)), Prediction: $(round(grad.pred, digits=3))") 
     end
 
     grad.predictions[col] = grad.pred

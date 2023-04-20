@@ -33,19 +33,21 @@ end
 
 
 function step!(grad::GradDescent, col::Int64)
-    for iter in 1:10
+    for iter in 1:1
         grad.pred[:,col] = round.(grad.weights * grad.inputs[:,col], digits=5)
         grad.errors[:,col] = round.(grad.pred[:,col] .- grad.targets[:,col] .^ 2, digits=5)
         grad.delta[:,col] = grad.pred[:,col] .- grad.targets[:,col]
-        grad.weighted[:,col] = round.(grad.delta[:,col] .* grad.inputs[:,col], digits=5)
-        gradients = (1 / grad.n_rows) * grad.weighted[:,col]
-        grad.weights -= grad.alpha * gradients
+        grad.weighted
     end
+    println("Error: $(round.(grad.errors, digits=3)), Prediction: $(round.(grad.pred, digits=3))") 
+
 end
 
 grad_descent = GradDescent()
 
-for col in 1:4
+for col in 1:1
     step!(grad_descent,col)
 end
 
+
+println(grad_descent.errors)

@@ -22,7 +22,7 @@ Base.@kwdef mutable struct StreetLight
 end
 
 function step!(light::StreetLight, row)
-    for iter in 1:50
+    for iter in 1:40
         light.preds[row] = sum(light.weights .* light.inputs[row,:])
         light.deltas[row] = light.preds[row] - light.targets[row]
         light.weighted = light.inputs[row,:] .* light.deltas[row] 

@@ -1,5 +1,5 @@
 Base.@kwdef mutable struct StreetLight
-    alpha::Float64 = 0.01
+    alpha::Float64 = 0.1
     iter::Int16 = 1
 
     targets = [0, 1, 0, 1, 1, 0]
@@ -15,12 +15,28 @@ Base.@kwdef mutable struct StreetLight
     
         n_rows = size(inputs, 1)
         n_cols = size(inputs, 2)
-        pred = zeros(n_rows, 1)
-        errors = zeros(n_rows, n_cols)
-        delta = zeros(n_rows, n_cols)
-        weighted = zeros(n_rows, n_cols)
+        preds = zeros(n_rows, 1)
+        errors = zeros(n_rows, 1)
+        deltas = zeros(n_rows, 1)
+        weighted = zeros(3, 1)
 end
 
 function step!(light::StreetLight, row)
-    light.pred[row,:] = 
+    for iter in 1:50
+        light.preds[row] = sum(light.weights .* light.inputs[row,:])
+        light.deltas[row] = light.preds[row] - light.targets[row]
+        light.weighted = light.inputs[row,:] .* light.deltas[row] 
+        light.weights -= light.alpha .* light.weighted
+
+    end
+    println("Target: $(light.targets[row])")
+    println("Prediction: $(round.(light.preds[row], digits=3))")
 end
+
+_light = StreetLight()
+
+for iter in 1:_light.n_rows
+    step!(_light, iter)
+end
+
+

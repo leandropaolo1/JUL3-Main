@@ -33,7 +33,7 @@ end
 
 
 function step!(grad::GradDescent, col::Int64)
-    for iter in 1:100
+    for iter in 1:40
         grad.pred[:,col] = grad.weights * grad.inputs[:,col]
         grad.delta[:,col] = grad.pred[:,col] .- grad.targets[:,col]
         grad.weighted = grad.delta[:,col] .* grad.inputs[:,col]

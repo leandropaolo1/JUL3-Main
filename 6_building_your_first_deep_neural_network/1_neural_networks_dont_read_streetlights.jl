@@ -1,3 +1,6 @@
+# Grokking Deep Learning (Andrew W. Trask) (z-lib.org)
+# PDF pg. 108
+
 Base.@kwdef mutable struct StreetLight
     alpha::Float64 = 0.1
     iter::Int16 = 1

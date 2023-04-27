@@ -24,13 +24,13 @@ Base.@kwdef mutable struct Layer
     weights_0_2::Matrix{Float64} = 2 * rand(hidden_size, 1) .- 1
 end
 
-function relu(x::Float64)
-    return (x > 0) * x
+function relu(layer::Layer)
+    return max(layer.pred > 0) * layer.pred
 end
 
 layer_0 = Layer()
-layer_1 = layer_0.initial_layer * layer_0.weights_0_1
-
+layer_1 = Layer().pred = layer_0.initial_layer * layer_0.weights_0_1
+layer_1 = relu(layer_1)
 
 
 

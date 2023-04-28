@@ -25,7 +25,7 @@ Base.@kwdef mutable struct Layer
 end
 
 function relu(layer::Layer)
-    return max(layer.pred > 0) * layer.pred
+    return max.(layer.pred, 0)
 end
 
 layer_0 = Layer()

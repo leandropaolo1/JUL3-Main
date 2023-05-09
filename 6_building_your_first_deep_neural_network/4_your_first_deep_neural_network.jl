@@ -18,7 +18,7 @@ end
 
 Base.@kwdef mutable struct Layer
     iter::Int8 = 1
-    alpha::Float64 = 0.2
+    alpha::Float64 = 0.01
     hidden_size::Int16 = 4
     error::Float64 = 0.0
     pred::Matrix{Float64} = zeros(1,4)

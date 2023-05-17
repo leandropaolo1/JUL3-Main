@@ -27,7 +27,7 @@ hidden_size = 4
 weights_0_1 = 2 * rand(3, hidden_size) .- 1
 weights_1_2 = 2 * rand(hidden_size, 1) .- 1
 
-for iteration in 1:1000
+for iteration in 1:100
     layer_2_error = 0
     for i in 1:size(streetlights, 1)
         layer_0 = streetlights[i:i, :]

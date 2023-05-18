@@ -45,21 +45,20 @@ layer_1 = Layer()
 layer_2 = Layer()
 
 for iter in 1:100
-    layer_2.error = 0
+    layer_2_error = 0
     for _iter in input.n_rows
-
         layer_1.pred = input.inputs[_iter : _iter,:] * layer_0.weights_0_1
         rectified_linear_unit(layer_1)
         layer_2_pred = layer_1.pred * layer_0.weights_1_2
         layer_2.pred[1] = layer_2_pred[1]
-        layer_2.error += sum((layer_2.pred[1] .- input.inputs[_iter,:]) .^ 2)
+        layer_2_error += sum((layer_2.pred[1] .- input.targets[_iter:_iter]) .^ 2)
         layer_2.delta[1] = layer_2.pred[1] - input.targets[_iter]
         layer_1.delta = layer_2.delta[1] * layer_0.weights_1_2 .* rectified_linear_unit_derivative(layer_1)
         layer_0.weights_1_2' .-= layer_0.alpha *layer_1.pred * layer_2.delta[1]
         layer_0.weights_0_1 .-= layer_0.alpha * input.inputs[_iter : _iter,:]' * layer_1.delta'
     end
     if iter % 10 == 0
-        println("Iteration: $iter -  Error: $(layer_2.error)")
+        println("Iteration: $iter -  Error: $(layer_2_error)")
     end
 
     

@@ -1,10 +1,7 @@
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Flux = "587475ba-b771-5e3f-ad9e-33799f191a9c"
-<<<<<<< HEAD
 Knet = "1902f260-5fb4-5aff-8c31-6271790ab950"
-=======
->>>>>>> 9b9b7ac9b9fd9b82055f8f41a9f0a7aea367f84d
 MLDatasets = "eb30cadb-4394-5ae3-aed4-317e484a6458"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"

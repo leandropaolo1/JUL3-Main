@@ -20,8 +20,6 @@ end
 
 # `Layer` represents a layer in the neural network.
 Base.@kwdef mutable struct Layer
-    # Number of iterations for the network.
-    iter::Int8 = 1
     # Learning rate.
     alpha::Float64 = 0.1
     # Size of the hidden layer.

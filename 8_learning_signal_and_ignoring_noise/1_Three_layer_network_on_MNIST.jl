@@ -1,10 +1,15 @@
 using MLDatasets
 
-# Import the MNIST dataset
-trainset = MNIST(:train)
+# training 28 x 28 x 60,000
 
-# Split the dataset into training and test sets
-x_train, y_train = MNIST(:train)
-x_test, y_test = MNIST(:test)
+images = MNIST(:train).features
+targets = MNIST(:train).targets
+single_image = MNIST(:train).features[:, :, 1]
+single_target = MNIST(:train).targets[1]
 
-(images, labels) = (reshape(train_x.features[:,:,1:1000], (28*28, 1000)), train_y.features[1:1000])
+# testing 28 x 28 x 10,000
+
+images = MNIST(:test).features
+targets = MNIST(:test).targets
+single_image = MNIST(:test).features[:, :, 1]
+single_target = MNIST(:test).targets[1]

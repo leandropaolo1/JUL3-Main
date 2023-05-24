@@ -1,5 +1,6 @@
 using MLDatasets
-
+using Random
+Random.seed!(1)
 
 # testing 28 x 28 x 10,000
 

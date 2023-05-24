@@ -26,9 +26,9 @@ function rectified_linear_unit_derivative(number::Number)
 end
 
 Base.@kwdef mutable struct Number
+    possible_matches::Int64=10
     hidden_size::Int64=40
     alpha::Float64=0.005
-    num_labels::Int64=10
     pixels::Int64=784
     target::Int8
     pred::Matrix{Float64} = zeros(1,hidden_size)
